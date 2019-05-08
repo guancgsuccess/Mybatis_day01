@@ -28,4 +28,7 @@
             </dataSource>
         </environment>
     </environments>
+    <mappers>
+        <mapper resource="mapperconfig/StudentDaoMapper.xml"></mapper>
+    </mappers>
 </configuration>

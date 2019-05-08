@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--此处的命名空间namespace的值应该对应的是接口的名称-->
+<mapper namespace="success">
+
+    <!--id的值应该是唯一的,推荐和接口中的名称是保持一致的
+        parameterType - 代表的指定参数的类型,可以使用别名
+        reultType - 代表的是返回的结果的类型
+
+        mybatis可以进行sql参数的设置,
+        可以自动将结果集封装到对象中.
+
+        注意 - 使用resultType进行自动映射需要满足的条件应该是
+               列名和属性名保持一致或者和setter/getter
+      -->
+    <select id="find" parameterType="_int" resultType="tech.aistar.day01.entity.Student">
+        select id,name,sno from db_student where id = #{id}
+    </select>
+</mapper>

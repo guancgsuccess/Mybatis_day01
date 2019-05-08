@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis的配置信息,由SqlSessionFactoryBuilder对象来读取xml文件构建出SqlSesisonFactory对象
+    mybatis-config.xml文件中配置了mybatis框架运行需要的环境
+-->
+<configuration>
+    <!--default的值作用使用对应的environment的id - 告诉mybatis当前使用的环境-->
+    <environments default="development">
+        <!--开发环境,测试环境,生产环境-->
+        <environment id="development">
+            <!--mybatis默认使用的事务就是JDBC事务 - 默认是自动提交的-->
+            <transactionManager type="JDBC"></transactionManager>
+
+            <!--关于mybatis的内置的数据源
+              1. UNPOOLED - 为每个请求创建和销毁连接.性能比较低下,不适合高并发的场景.几乎不用的.
+              2. POOLED - 相当于是之前jdbc中学习的连接池,引入了"池"的概念.一开始会预先创建出连接放入到连接池中
+                        - 当连接用完之后,不是关闭,而是释放,并且放回放入到"池"中 - 开发环境和测试环境中推荐使用的.
+              3. JNDI - 如果应用服务器中存在连接池,那么mybatis会优先选择应用服务器中的连接池.生产环境中推荐使用的
+            -->
+
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver"></property>
+                <property name="url" value="jdbc:mysql://localhost:3306/aistar?useSSL=false&amp;useUnicode=false&amp;CharacterEncoding=utf8"></property>
+                <property name="username" value="root"></property>
+                <property name="password" value="root"></property>
+            </dataSource>
+        </environment>
+    </environments>
+</configuration>

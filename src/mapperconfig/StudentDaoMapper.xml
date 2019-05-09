@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<!--此处的命名空间namespace的值应该对应的是接口的名称-->
+<!--此处:的命名空间namespace的值应该对应的是接口的名称
+   作用:是用来分离sql-->
 <mapper namespace="success">
 
     <!--id的值应该是唯一的,推荐和接口中的名称是保持一致的
@@ -14,8 +15,22 @@
 
         注意 - 使用resultType进行自动映射需要满足的条件应该是
                列名和属性名保持一致或者和setter/getter
+
+        参数的占位符的方式可以通过#{参数}以及${参数}
+
+        如果传入的参数是一个简单类型的话,那么#{参数}中的参数可以是任意名称或者是value
       -->
     <select id="find" parameterType="_int" resultType="tech.aistar.day01.entity.Student">
-        select id,name,sno from db_student where id = #{id}
+        select id,name sname,sno from db_student where id = #{value}
+    </select>
+
+    <select id="findByLike" parameterType="String" resultType="tech.aistar.day01.entity.Student">
+        <!--
+           string属于简单类型
+         #{} - >PreparedStatement方式的发送参数
+         ${} -> 是Statement方式的拼接sql,容易造成sql的注入 - 将传入进来的参数原封不动的拼接到sql语句中去
+         /* select id,name sname,sno from db_student where name like #{value}*/
+         -->
+        select id,name,sno from db_student where name like ${value}
     </select>
 </mapper>

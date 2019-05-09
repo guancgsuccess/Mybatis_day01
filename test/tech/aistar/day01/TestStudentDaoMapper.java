@@ -9,6 +9,7 @@ import tech.aistar.day01.entity.Student;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 /**
  * @author success
@@ -32,6 +33,29 @@ public class TestStudentDaoMapper {
             //selectOne(mapper的xml文件的namespace.某个标签的id的值)
             //Student s = sqlSession.selectOne("tech.aistar.day01.dao.StudentDaoMapper.findById",5);
             Student s = sqlSession.selectOne("success.find",5);
+
+            System.out.println(s);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testFindByLike(){
+        //1.获取mybatis-config.xml的字节输入流
+        try {
+            InputStream in = Resources.getResourceAsStream("mybatis-config.xml");
+
+            SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(in);
+
+            SqlSession sqlSession = sqlSessionFactory.openSession();
+
+            //因为查询的是返回的单个对象
+            //selectOne(mapper的xml文件的namespace.某个标签的id的值)
+            //Student s = sqlSession.selectOne("tech.aistar.day01.dao.StudentDaoMapper.findById",5);
+
+            List<Student> s = sqlSession.selectList("success.findByLike","'%小%'");
 
             System.out.println(s);
 

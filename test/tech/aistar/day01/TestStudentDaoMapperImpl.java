@@ -16,7 +16,7 @@ import java.io.InputStream;
  * @description:本类用来演示:
  * @date 2019/5/8 0008
  */
-public class TestStudentDaoMapper {
+public class TestStudentDaoMapperImpl {
 
     @Test
     public void testFindById(){
@@ -30,7 +30,7 @@ public class TestStudentDaoMapper {
 
             //因为查询的是返回的单个对象
             //selectOne(mapper的xml文件的namespace.某个标签的id的值)
-            //Student s = sqlSession.selectOne("tech.aistar.day01.dao.StudentDaoMapper.findById",5);
+            //Student s = sqlSession.selectOne("tech.aistar.day01.dao.StudentDaoMapperImpl.findById",5);
             Student s = sqlSession.selectOne("success.find",5);
 
             System.out.println(s);

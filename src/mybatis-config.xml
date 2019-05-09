@@ -6,6 +6,14 @@
     mybatis-config.xml文件中配置了mybatis框架运行需要的环境
 -->
 <configuration>
+    <settings>
+        <!--如果应用系统中存在多个日志框架,那么此处强制使用logfj
+          如果此处没有指定,那么mybatis会按照日志的优先级进行查找日志
+          commons-logging[tomcat服务器中默认存在的] log4j2 log4j
+        -->
+        <setting name="logImpl" value="LOG4J"/>
+    </settings>
+    
     <!--default的值作用使用对应的environment的id - 告诉mybatis当前使用的环境-->
     <environments default="development">
         <!--开发环境,测试环境,生产环境-->

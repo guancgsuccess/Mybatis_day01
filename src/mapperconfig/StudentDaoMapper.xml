@@ -31,6 +31,10 @@
          ${} -> 是Statement方式的拼接sql,容易造成sql的注入 - 将传入进来的参数原封不动的拼接到sql语句中去
          /* select id,name sname,sno from db_student where name like #{value}*/
          -->
+
+        <!--
+            ${}如果是一个简单类型的话,那么只能是value
+        -->
         select id,name,sno from db_student where name like ${value}
     </select>
 </mapper>

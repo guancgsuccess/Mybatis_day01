@@ -34,14 +34,26 @@ public class StudentDaoImpl implements StudentDaoMapper{
 
     @Override
     public void delById(Integer id) {
+        SqlSession sqlSession = MyBatisUtil.getSession();
 
+        sqlSession.delete("success.delById",id);
+
+        sqlSession.commit();
+
+        sqlSession.close();
     }
 
     @Override
     public void save(Student student) {
         SqlSession sqlSession = MyBatisUtil.getSession();
 
-        sqlSession.insert("success.save",student);
+        //插入之后不返回主键值
+        //sqlSession.insert("success.save",student);
+
+        //插入之后返回主键值
+        sqlSession.insert("success.saverkeys",student);
+
+        System.out.println(student);
 
         sqlSession.commit();
 
@@ -50,6 +62,12 @@ public class StudentDaoImpl implements StudentDaoMapper{
 
     @Override
     public void update(Student studnet) {
+        SqlSession sqlSession = MyBatisUtil.getSession();
 
+        sqlSession.update("success.update",studnet);
+
+        sqlSession.commit();
+
+        sqlSession.close();
     }
 }

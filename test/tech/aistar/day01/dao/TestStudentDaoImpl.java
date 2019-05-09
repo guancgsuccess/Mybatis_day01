@@ -32,9 +32,30 @@ public class TestStudentDaoImpl {
     @Test
     public void testSave(){
         Student s = new Student();
-        s.setSno("1011");
-        s.setSname("王静静2");
+        s.setSno("1013");
+        s.setSname("老詹秃头");
         s.setBirthday(new Date());
         dao.save(s);
     }
+
+    @Test
+    public void testDel(){
+        dao.delById(200018);
+    }
+
+    @Test
+    public void testUpdate(){
+        //1. 自己new一个 - >保证对象的id在数据库中要有记录
+
+        //2.推荐是先根据id获取
+        Student s = dao.findById(200015);
+
+
+        s.setSno("8888");
+
+        s.setSname("码云");
+
+        dao.update(s);
+    }
+
 }

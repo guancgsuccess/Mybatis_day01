@@ -35,10 +35,36 @@
         <!--
             ${}如果是一个简单类型的话,那么只能是value
         -->
-        select id,name,sno from db_student where name like ${value}
+        select id,name,sno,birthday from db_student where name like ${value}
     </select>
 
     <insert id="save" parameterType="tech.aistar.day01.entity.Student">
-        insert into db_student(sno,name,birthday) values(#{sno},#{age},#{birthday})
+        <!--
+        传入的参数是一个对象类型,那么#{}中的参数一定是在Student中必定可以通过反射找到
+        底层的原理是通过OGNL - 对象导航语言.
+        -->
+        insert into db_student(sno,name,birthday) values(#{sno},#{sname},#{birthday})
     </insert>
+
+    <!--插入之后允许返回主键值-->
+    <insert id="saverkeys" parameterType="tech.aistar.day01.entity.Student">
+
+        <!---
+        order="AFTER" - 代表是执行insert语句之后返回
+        keyColumn - 哪个列的自增值
+        keyProperty - 将查询的自增的值封装到对象的哪个属性上-->
+        <selectKey order="AFTER" keyColumn="id" keyProperty="id" resultType="int">
+            select last_insert_id()
+        </selectKey>
+
+        insert into db_student(sno,name,birthday) values(#{sno},#{sname},#{birthday})
+    </insert>
+
+    <delete id="delById" parameterType="int">
+        delete from db_student where id = #{value}
+    </delete>
+
+    <update id="update" parameterType="tech.aistar.day01.entity.Student">
+        update db_student set sno=#{sno},name=#{sname},birthday=#{birthday} where id=#{id}
+    </update>
 </mapper>

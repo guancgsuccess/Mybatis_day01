@@ -37,6 +37,21 @@
         </environment>
     </environments>
     <mappers>
+        <!--mapper.xml文件的映射的路径的配置-->
         <mapper resource="mapperconfig/StudentDaoMapper.xml"></mapper>
+
+        <!--mapper的映射器-->
+        <!--第一种:引用类路径下的xml-->
+        <!--<mapper resource="tech/aistar/day02/mapStudentMapper2.xml.xml"></mapper>-->
+        <!--<mapper resource="mapperconStudentMapper2.xml.xml"></mapper>-->
+
+        <!--第二种:使用mapper接口的全限定名\
+          采用mapper代理的开发方式 - mapper接口的名称和mapper映射的名称以及位置都是一致的
+        -->
+        <!--<mapper class="tech.aistar.day02.mapper.StudentMapper"></mapper>-->
+
+        <!--第三种方式 - 推荐使用的方式 - 扫描包-->
+        <package name="tech.aistar"></package>
+
     </mappers>
 </configuration>

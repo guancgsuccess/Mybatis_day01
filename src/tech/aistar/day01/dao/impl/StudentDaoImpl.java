@@ -39,7 +39,13 @@ public class StudentDaoImpl implements StudentDaoMapper{
 
     @Override
     public void save(Student student) {
+        SqlSession sqlSession = MyBatisUtil.getSession();
 
+        sqlSession.insert("success.save",student);
+
+        sqlSession.commit();
+
+        sqlSession.close();
     }
 
     @Override

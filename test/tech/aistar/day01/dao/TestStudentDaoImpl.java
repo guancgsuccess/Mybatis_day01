@@ -7,9 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import tech.aistar.day01.dao.impl.StudentDaoImpl;
 import tech.aistar.day01.dao.impl.StudentDaoMapperImpl;
+import tech.aistar.day01.entity.Student;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Date;
 
 /**
  * @author success
@@ -25,5 +27,14 @@ public class TestStudentDaoImpl {
     @Test
     public void testFindById(){
         System.out.println(dao.findById(5));
+    }
+
+    @Test
+    public void testSave(){
+        Student s = new Student();
+        s.setSno("1011");
+        s.setSname("王静静2");
+        s.setBirthday(new Date());
+        dao.save(s);
     }
 }

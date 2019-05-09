@@ -18,4 +18,8 @@
     <select id="find" parameterType="_int" resultType="tech.aistar.day01.entity.Student">
         select id,name,sno from db_student where id = #{id}
     </select>
+
+    <insert id="save" parameterType="tech.aistar.day01.entity.Student">
+        insert into db_student(sno,name,birthday) values(#{sno},#{age},#{birthday})
+    </insert>
 </mapper>

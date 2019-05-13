@@ -6,6 +6,14 @@
     mybatis-config.xml文件中配置了mybatis框架运行需要的环境
 -->
 <configuration>
+    <!--引入外部属性文件-->
+    <properties resource="dbConfig.properties"></properties>
+    <!--<properties resource="dbConfig.properties">-->
+        <!--&lt;!&ndash;如果此处的name的属性在外部的dbConfig.properties文件中已经存在了,&ndash;&gt;-->
+        <!--&lt;!&ndash;则会被外部属性文件中的配置覆盖&ndash;&gt;-->
+        <!--<property name="mysql.user" value="root"></property>-->
+    <!--</properties>-->
+
     <settings>
         <!--如果应用系统中存在多个日志框架,那么此处强制使用logfj
           如果此处没有指定,那么mybatis会按照日志的优先级进行查找日志
@@ -13,7 +21,18 @@
         -->
         <setting name="logImpl" value="LOG4J"/>
     </settings>
-    
+
+    <!--配置类型的别名-->
+    <typeAliases>
+        <!--针对每个自定义对象类型,都要去取别名-->
+        <!--<typeAlias type="tech.aistar.day01.entity.Student" alias="student"></typeAlias>-->
+
+        <!--推荐使用的方式,扫描需要取别名的类的包即可
+            默认的别名就是该类的名称或者是该类的名称[首字母小写]
+        -->
+        <package name="tech.aistar.day01.entity"></package>
+    </typeAliases>
+
     <!--default的值作用使用对应的environment的id - 告诉mybatis当前使用的环境-->
     <environments default="development">
         <!--开发环境,测试环境,生产环境-->
@@ -29,10 +48,10 @@
             -->
 
             <dataSource type="POOLED">
-                <property name="driver" value="com.mysql.jdbc.Driver"></property>
-                <property name="url" value="jdbc:mysql://localhost:3306/aistar?useSSL=false&amp;useUnicode=false&amp;CharacterEncoding=utf8"></property>
-                <property name="username" value="root"></property>
-                <property name="password" value="root"></property>
+                <property name="driver" value="${mysql.driver}"></property>
+                <property name="url" value="${mysql.url}"></property>
+                <property name="username" value="${mysql.user}"></property>
+                <property name="password" value="${mysql.password}"></property>
             </dataSource>
         </environment>
     </environments>

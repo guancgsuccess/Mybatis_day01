@@ -7,7 +7,7 @@
 -->
 <mapper namespace="tech.aistar.day02.mapper.StudentMapper">
     <!--映射文件中的每个标签的id的值必须要和mapper接口中定义的方法的名称保持一致[必须的]-->
-    <select id="findById" parameterType="_int" resultType="tech.aistar.day01.entity.Student">
+    <select id="findById" parameterType="_int" resultType="student">
         select id,name sname,sno from db_student where id = #{value}
     </select>
 </mapper>

@@ -1,5 +1,7 @@
 package tech.aistar.day01.entity;
 
+import org.apache.ibatis.type.Alias;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -9,7 +11,8 @@ import java.util.Objects;
  * @version 1.0
  * @description:本类用来演示:学生实体类
  * @date 2019/4/28 0028
- */
+**/
+//@Alias("s")
 public class Student implements Serializable{
     private Integer id;
 

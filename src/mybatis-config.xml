@@ -69,6 +69,7 @@
         -->
         <!--<mapper class="tech.aistar.day02.mapper.StudentMapper"></mapper>-->
 
+        <mapper resource="tech/aistar/day02/mapper/sql_all.xml"></mapper>
         <!--第三种方式 - 推荐使用的方式 - 扫描包-->
         <package name="tech.aistar"></package>
 

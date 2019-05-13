@@ -22,6 +22,11 @@
         </if>
     </select>
 
+    <!--新建一个sql片段-->
+    <sql id="queryAll_sql">
+        select * from db_student
+    </sql>
+
     <select id="findAllByAnyConditional" resultType="student">
         <!--select * from db_student where 1=1-->
         <!--<if test="id != null">-->
@@ -32,14 +37,17 @@
             <!--and sname like concat('%',#{sname},'%')-->
         <!--</if>-->
 
-        select * from db_student
+        <!--select * from db_student
+        引用sql片段-->
+        <include refid="queryAll_sql"></include>
         <where>
-            <if test="id != null">
+           <!-- <if test="id != null">
                  and id > #{id}
             </if>
             <if test="sname !=null ">
               and sname like concat('%',#{sname},'%')
-            </if>
+            </if>-->
+            <include refid="sql_all_xml.query_where"></include>
        </where>
     </select>
 </mapper>

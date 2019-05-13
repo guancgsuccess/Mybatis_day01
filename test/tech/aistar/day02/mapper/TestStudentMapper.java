@@ -4,6 +4,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import tech.aistar.day01.entity.Student;
 import tech.aistar.util.MyBatisUtil;
+import tech.aistar.day01.entity.vo.StudentQueryVo;
+
+import java.util.List;
 
 /**
  * @author success
@@ -31,5 +34,24 @@ public class TestStudentMapper {
         Student s = mapper.findById(5);
 
         System.out.println(s);
+    }
+    @Test
+    public void testFindByIdAndSname(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        //1.获取mapper代理对象
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+
+        StudentQueryVo queryVo = new StudentQueryVo();
+        Student s = new Student();
+        s.setId(100015);
+        s.setSname("%o%");
+
+        queryVo.setStudent(s);
+
+        List<Student> studentList = mapper.findByIdorSname(queryVo);
+
+        studentList.forEach(System.out::println);
+
+        sqlSession.close();
     }
 }

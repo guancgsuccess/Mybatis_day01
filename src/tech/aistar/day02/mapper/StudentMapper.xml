@@ -10,4 +10,10 @@
     <select id="findById" parameterType="_int" resultType="student">
         select id,name sname,sno from db_student where id = #{value}
     </select>
+
+
+    <!--输入映射是一个对象类型 - 充分使用OGNL 对象导航语言-->
+    <select id="findByIdorSname" parameterType="studentQueryVo" resultType="student">
+        select * from db_student where id>#{student.id} and sname like #{student.sname}
+    </select>
 </mapper>

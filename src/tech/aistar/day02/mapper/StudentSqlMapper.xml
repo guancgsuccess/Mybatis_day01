@@ -50,4 +50,49 @@
             <include refid="sql_all_xml.query_where"></include>
        </where>
     </select>
+
+    <update id="update" parameterType="student">
+        update db_student
+        <set>
+            <if test="sno != null">sno = #{sno},</if>
+            <if test="sname != null">sname=#{sname},</if>
+            <if test="birthday != null">birthday=#{birthday}</if>
+        </set>
+
+        where id = #{id}
+    </update>
+
+    <select id="findAllByFirstConditional" resultType="student">
+        <include refid="queryAll_sql"></include>
+        <where>
+            <choose>
+                <when test="id != null">and id > #{id}</when>
+                <when test="sname != null">and sname like concat("%",#{sname},"%")</when>
+                <!--如果俩个条件都不存在,则执行otherwise-->
+                <!--<otherwise>and 1=1</otherwise>-->
+            </choose>
+        </where>
+    </select>
+
+    <select id="findByIds" resultType="student">
+        <include refid="queryAll_sql"></include>
+        where
+        <!--
+            collection - 迭代的集合对象 - @Param("参数名")
+            item 代表的就是迭代的集合中的具体的某个元素
+            open 代表的就是sql语句的起始符号
+            close 代表的就是sql语句的结束符号
+            separator 代表就是sql语句的条件的连接符号
+        -->
+        <foreach collection="ids" item="id" open="(" separator="OR" close=")">
+            id = #{id}
+        </foreach>
+    </select>
+
+    <insert id="saveList">
+        insert into db_student(sno,sname,birthday) VALUES
+        <foreach collection="students" item="s" separator=",">
+            (#{s.sno},#{s.sname},#{s.birthday})
+        </foreach>
+    </insert>
 </mapper>

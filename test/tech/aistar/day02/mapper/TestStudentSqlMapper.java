@@ -6,6 +6,7 @@ import tech.aistar.day01.entity.Student;
 import tech.aistar.day01.entity.vo.StudentQueryVo;
 import tech.aistar.util.MyBatisUtil;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -51,5 +52,78 @@ public class TestStudentSqlMapper {
 
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void testUpdate(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+
+        StudentSqlMapper mapper = sqlSession.getMapper(StudentSqlMapper.class);
+
+        Student s = mapper.getById(100015);
+
+        s.setSname("t7");
+
+        s.setBirthday(null);
+
+        mapper.update(s);
+
+        sqlSession.commit();
+
+    }
+
+    @Test
+    public void testFindAllByFirstConditional(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+
+        StudentSqlMapper mapper = sqlSession.getMapper(StudentSqlMapper.class);
+
+        List<Student> list = mapper.findAllByFirstConditional(null,null);
+
+        list.forEach(System.out::println);
+    }
+
+    @Test
+    public void testFindByIds(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+
+        StudentSqlMapper mapper = sqlSession.getMapper(StudentSqlMapper.class);
+
+        List<Integer> ids = new ArrayList<>();
+        ids.add(100015);
+        ids.add(100014);
+        ids.add(100016);
+
+        List<Student> list = mapper.findByIds(ids);
+
+        list.forEach(System.out::println);
+    }
+    @Test
+    public void testSaveList(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+
+        StudentSqlMapper mapper = sqlSession.getMapper(StudentSqlMapper.class);
+
+
+        Student s1 = new Student();
+        s1.setSno("300015");
+        s1.setSname("好老詹");
+        s1.setBirthday(new Date());
+
+
+        Student s2 = new Student();
+        s2.setSno("300016");
+        s2.setSname("老詹好");
+        s2.setBirthday(new Date());
+
+        List<Student> list = new ArrayList<>();
+        list.add(s1);
+        list.add(s2);
+
+        mapper.saveList(list);
+
+        sqlSession.commit();
+    }
+
+
 
 }

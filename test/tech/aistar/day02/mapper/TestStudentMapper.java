@@ -88,4 +88,17 @@ public class TestStudentMapper {
 
         sqlSession.close();
     }
+    @Test
+    public void testFindAll(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        //1.获取mapper代理对象
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+
+        List<Student> studentList = mapper.findAll();
+
+        studentList.forEach(System.out::println);
+
+        sqlSession.close();
+    }
+
 }

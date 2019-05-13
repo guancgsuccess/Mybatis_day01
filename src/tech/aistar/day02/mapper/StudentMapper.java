@@ -43,5 +43,9 @@ public interface StudentMapper {
      */
     List<Student> findByIdorSnameMap(Map<String,Object> map);
 
-
+    /**
+     * 查询所有的学生信息
+     * @return
+     */
+    List<Student> findAll();
 }

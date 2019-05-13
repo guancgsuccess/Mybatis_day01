@@ -32,4 +32,18 @@
     <select id="findByIdorSnameMap" parameterType="map" resultType="student">
         select * from db_student where id>#{pid} and sname like #{pname}
     </select>
+
+    <!--手动进行映射-->
+    <resultMap id="findAllMap" type="student">
+        <!--id的手动映射比较特殊-->
+        <id column="_id" property="id"></id>
+        <!--其余属性的映射-->
+        <result column="name" property="sname"></result>
+        <!--其余只要查询出来的列名和属性名保持一致,仍然是可以自动进行映射-->
+    </resultMap>
+
+    <!--一旦查询出来的列和属性不一致,那么需要使用resultMap来进行手动封装-->
+    <select id="findAll" resultMap="findAllMap">
+        select id _id,sno,sname name,birthday from db_student
+    </select>
 </mapper>

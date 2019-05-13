@@ -16,4 +16,20 @@
     <select id="findByIdorSname" parameterType="studentQueryVo" resultType="student">
         select * from db_student where id>#{student.id} and sname like #{student.sname}
     </select>
+
+    <!--第二种方式:参数散列的出现在mapper接口的方法中,使用到了参数注解
+        @Param("参数名称"),一旦使用到了参数注解,那么标签中的属性parameterType不需要设置了
+
+        那么#{参数名}一定要和@Param("参数名")俩者的参数名称一定要保持一致.
+     -->
+    <select id="findByIdorSnameAno" resultType="student">
+        select * from db_student where id>#{pid} and sname like #{pname}
+    </select>
+
+    <!--
+        那么此处的#{参数名}一定要和参数中map的key保持一致
+      -->
+    <select id="findByIdorSnameMap" parameterType="map" resultType="student">
+        select * from db_student where id>#{pid} and sname like #{pname}
+    </select>
 </mapper>

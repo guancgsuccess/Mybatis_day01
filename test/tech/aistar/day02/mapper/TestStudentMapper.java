@@ -6,7 +6,9 @@ import tech.aistar.day01.entity.Student;
 import tech.aistar.util.MyBatisUtil;
 import tech.aistar.day01.entity.vo.StudentQueryVo;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author success
@@ -14,6 +16,7 @@ import java.util.List;
  * @description:本类用来演示:
  * @date 2019/5/9 0009
  */
+@SuppressWarnings("all")
 public class TestStudentMapper {
     @Test
     public void testFindById(){
@@ -49,6 +52,37 @@ public class TestStudentMapper {
         queryVo.setStudent(s);
 
         List<Student> studentList = mapper.findByIdorSname(queryVo);
+
+        studentList.forEach(System.out::println);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testFindByIdAndSnameAno(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        //1.获取mapper代理对象
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+
+        List<Student> studentList = mapper.findByIdorSnameAno(100015,"%o%");
+
+        studentList.forEach(System.out::println);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testFindByIdAndSnameMap(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        //1.获取mapper代理对象
+        StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
+
+        Map<String,Object> map = new HashMap<>();
+
+        map.put("pid",100015);
+        map.put("pname","%o%");
+
+        List<Student> studentList = mapper.findByIdorSnameMap(map);
 
         studentList.forEach(System.out::println);
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--每个映射文件中的namespace的值应该就是mapper接口的全限定名[必须的]
+ jdk的动态代理就是基于接口,只能代理接口.
+-->
+<mapper namespace="tech.aistar.day02.mapper.StudentSqlMapper">
+    <select id="findByIdorSnameAno" resultType="student">
+        select * from db_student where id>#{id}
+        <!--使用动态sql中的if语句来判断某个参数是否存在-->
+        <if test="sname != null">
+            and sname like #{sname}
+        </if>
+    </select>
+
+    <select id="findByIdorSnameVo" parameterType="studentQueryVo" resultType="student">
+        select * from db_student where id>#{student.id}
+        <!--使用动态sql中的if语句来判断某个参数是否存在-->
+        <if test="student.sname != null">
+            and sname like concat('%',#{student.sname},'%')
+        </if>
+    </select>
+
+    <select id="findAllByAnyConditional" resultType="student">
+        <!--select * from db_student where 1=1-->
+        <!--<if test="id != null">-->
+            <!--and id > #{id}-->
+        <!--</if>-->
+
+        <!--<if test="sname !=null ">-->
+            <!--and sname like concat('%',#{sname},'%')-->
+        <!--</if>-->
+
+        select * from db_student
+        <where>
+            <if test="id != null">
+                 and id > #{id}
+            </if>
+            <if test="sname !=null ">
+              and sname like concat('%',#{sname},'%')
+            </if>
+       </where>
+    </select>
+</mapper>

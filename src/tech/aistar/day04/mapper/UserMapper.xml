@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.aistar.day04.mapper.UserMapper">
+    <resultMap id="findByIdMap" type="userCustomVo" extends="common_sql.queryUserMap">
+        <id column="id" property="id"></id>
+        <!--<result column="username" property="username"></result>-->
+        <!--<result column="birthday" property="birthday"></result>-->
+        <!--<result column="address" property="address"></result>-->
+        <!--<result column="sex" property="sex"></result>-->
+        <!--引入resultMap-->
+
+        <!--封装orders-->
+        <!--关联的是多的一方-->
+        <collection property="ordersCustomsVos" column="oid" ofType="OrdersCustomsVo" resultMap="common_sql.queryOrderMap">
+
+
+            <!--<result column="user_id" property="userId"></result>-->
+            <!--<result column="number" property="number"></result>-->
+            <!--<result column="createtime" property="createtime"></result>-->
+            <!--<result column="note" property="note"></result>-->
+
+            <!--加载多的一方-->
+            <collection property="ordersDetailCustomVos" column="orders_id" ofType="OrdersDetailCustomVo">
+                <id column="did" property="id"></id>
+                <!--   <id column="did" property="id"></id>
+                <result column="orders_id" property="ordersId"></result>
+                <result column="items_id" property="itemsId"></result>
+                <result column="items_num" property="itemsNum"></result>-->
+
+                <!--一个明细对应一个商品-->
+                <!--加载的是一的一方-->
+                <association property="itemCustomVo" column="items_id" javaType="ItemCustomVo">
+                    <id column="itemid" property="id"></id>
+                    <result column="name" property="name"></result>
+                    <result column="price" property="price"></result>
+                    <result column="pic" property="pic"></result>
+                    <result column="detail" property="detail"></result>
+                    <result column="itime" property="createtime"></result>
+                </association>
+            </collection>
+
+        </collection>
+
+    </resultMap>
+
+    <select id="findById" resultMap="findByIdMap" parameterType="int">
+        select u.*,o.id oid,o.user_id,o.number,o.createtime,o.note,d.id did,d.orders_id,d.items_id,d.items_num
+            ,item.id itemid,item.name,item.price,item.detail,item.pic,item.createtime itime from user u
+            join orders o on u.id = o.user_id
+            join orderdetail d on d.orders_id = o.id
+            join items item on item.id = d.items_id
+        where u.id = #{value}
+    </select>
+</mapper>

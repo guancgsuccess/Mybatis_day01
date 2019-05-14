@@ -35,4 +35,15 @@ public class OrdersMapperTest {
 
         System.out.println(queryVo.getUser());
     }
+
+    @Test
+    public void testFindByIdAndDetails(){
+        SqlSession sqlSession = MyBatisUtil.getSession();
+        OrdersMapper mapper = sqlSession.getMapper(OrdersMapper.class);
+        OrdersCustomVo queryVo = mapper.findByOrderIdAndDetails(3);
+
+        System.out.println(queryVo);
+
+        queryVo.getOrderdetailSet().forEach(System.out::println);
+    }
 }

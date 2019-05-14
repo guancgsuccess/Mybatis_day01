@@ -21,4 +21,11 @@ public interface OrdersMapper {
 
     OrdersCustomVo findById(Integer id);
 
+    /**
+     * 根据订单的id加载出订单信息并且级联加载出该订单的订单明细的信息
+     * @param id
+     * @return
+     */
+    OrdersCustomVo findByOrderIdAndDetails(Integer id);
+
 }

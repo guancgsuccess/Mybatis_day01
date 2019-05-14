@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="common_sql">
+   <resultMap id="queryUserMap" type="userCustomVo">
+       <result column="username" property="username"></result>
+       <result column="birthday" property="birthday"></result>
+       <result column="address" property="address"></result>
+       <result column="sex" property="sex"></result>
+   </resultMap>
+
+    <resultMap id="queryOrderMap" type="ordersCustomsVo">
+        <id column="oid" property="id"></id>
+        <result column="user_id" property="userId"></result>
+        <result column="number" property="number"></result>
+        <result column="createtime" property="createtime"></result>
+        <result column="note" property="note"></result>
+    </resultMap>
+
+    <resultMap id="queryOrderDetailMap" type="OrdersDetailCustomVo">
+        <id column="did" property="id"></id>
+        <result column="orders_id" property="ordersId"></result>
+        <result column="items_id" property="itemsId"></result>
+        <result column="items_num" property="itemsNum"></result>
+    </resultMap>
+</mapper>

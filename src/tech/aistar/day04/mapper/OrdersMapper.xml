@@ -14,16 +14,37 @@
         <!--<result column="" property=""></result>-->
 
         <!--映射封装一的一方-->
-        <association property="user" column="uid" javaType="user">
+        <association property="user" column="uid" javaType="user" resultMap="common_sql.queryUserMap">
             <id column="uid" property="id"></id>
-            <result column="username" property="username"></result>
-            <result column="birthday" property="birthday"></result>
-            <result column="address" property="address"></result>
-            <result column="sex" property="sex"></result>
+            <!--<result column="username" property="username"></result>-->
+            <!--<result column="birthday" property="birthday"></result>-->
+            <!--<result column="address" property="address"></result>-->
+            <!--<result column="sex" property="sex"></result>-->
         </association>
     </resultMap>
     <select id="findById" parameterType="int" resultMap="findByIdMap">
         select o.*,u.id uid,u.username,u.sex from orders o join user u on
         o.user_id = u.id where o.id = #{value}
+    </select>
+
+    <resultMap id="findByOrderIdAndDetailsMap" type="ordersCustomVo" extends="common_sql.queryOrderMap">
+        <id column="id" property="id"></id>
+        <!--<id column="id" property="id"></id>-->
+        <!--<result column="user_id" property="userId"></result>-->
+        <!--<result column="number" property="number"></result>-->
+        <!--<result column="createtime" property="createtime"></result>-->
+        <!--<result column="note" property="note"></result>-->
+        <!--映射多的一方-->
+        <collection property="orderdetailSet" column="orders_id" ofType="orderdetail" resultMap="common_sql.queryOrderDetailMap">
+            <!--<id column="did" property="id"></id>-->
+            <!--<result column="orders_id" property="ordersId"></result>-->
+            <!--<result column="items_id" property="itemsId"></result>-->
+            <!--<result column="items_num" property="itemsNum"></result>-->
+        </collection>
+    </resultMap>
+
+    <select id="findByOrderIdAndDetails" parameterType="int" resultMap="findByOrderIdAndDetailsMap">
+        select o.*,d.id did,d.orders_id,d.items_id,d.items_num from orders o
+        join orderdetail d on d.orders_id = o.id where o.id = #{value}
     </select>
 </mapper>

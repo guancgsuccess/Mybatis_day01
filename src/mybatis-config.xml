@@ -20,6 +20,9 @@
           commons-logging[tomcat服务器中默认存在的] log4j2 log4j
         -->
         <setting name="logImpl" value="LOG4J"/>
+
+        <!--开启列的匈牙利命名规则到java的驼峰命名规则的映射-->
+        <setting name="mapUnderscoreToCamelCase" value="true"></setting>
     </settings>
 
     <!--配置类型的别名-->
@@ -31,6 +34,7 @@
             默认的别名就是该类的名称或者是该类的名称[首字母小写]
         -->
         <package name="tech.aistar.day01.entity"></package>
+        <package name="tech.aistar.day04"></package>
     </typeAliases>
 
     <!--default的值作用使用对应的environment的id - 告诉mybatis当前使用的环境-->

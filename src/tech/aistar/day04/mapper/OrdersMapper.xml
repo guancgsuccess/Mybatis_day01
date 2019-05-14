@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tech.aistar.day04.mapper.OrdersMapper">
+
+    <select id="getById" resultType="ordersQueryVo" parameterType="int">
+      select o.*,u.id uid,u.username from orders o join user u on
+      o.user_id = u.id where o.id = #{value}
+    </select>
+
+    <resultMap id="findByIdMap" type="ordersCustomVo">
+        <id column="id" property="id"></id>
+        <!--<result column="" property=""></result>-->
+
+        <!--映射封装一的一方-->
+        <association property="user" column="uid" javaType="user">
+            <id column="uid" property="id"></id>
+            <result column="username" property="username"></result>
+            <result column="birthday" property="birthday"></result>
+            <result column="address" property="address"></result>
+            <result column="sex" property="sex"></result>
+        </association>
+    </resultMap>
+    <select id="findById" parameterType="int" resultMap="findByIdMap">
+        select o.*,u.id uid,u.username,u.sex from orders o join user u on
+        o.user_id = u.id where o.id = #{value}
+    </select>
+</mapper>

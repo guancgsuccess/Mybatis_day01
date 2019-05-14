@@ -16,6 +16,7 @@
         <result column="number" property="number"></result>
         <result column="createtime" property="createtime"></result>
         <result column="note" property="note"></result>
+        <collection property="ordersDetailCustomVos" ofType="OrdersDetailCustomVo" resultMap="queryOrderDetailMap"></collection>
     </resultMap>
 
     <resultMap id="queryOrderDetailMap" type="OrdersDetailCustomVo">
@@ -23,5 +24,15 @@
         <result column="orders_id" property="ordersId"></result>
         <result column="items_id" property="itemsId"></result>
         <result column="items_num" property="itemsNum"></result>
+        <association property="itemCustomVo" javaType="ItemCustomVo" resultMap="queryItemMap"></association>
+    </resultMap>
+
+    <resultMap id="queryItemMap" type="ItemCustomVo">
+        <id column="itemid" property="id"></id>
+        <result column="name" property="name"></result>
+        <result column="price" property="price"></result>
+        <result column="pic" property="pic"></result>
+        <result column="detail" property="detail"></result>
+        <result column="itime" property="createtime"></result>
     </resultMap>
 </mapper>

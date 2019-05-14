@@ -4,10 +4,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import tech.aistar.day04.mapper.OrdersMapper;
 import tech.aistar.day04.mapper.UserMapper;
-import tech.aistar.day04.vo.OrdersCustomVo;
-import tech.aistar.day04.vo.OrdersQueryVo;
-import tech.aistar.day04.vo.UserCustomVo;
+import tech.aistar.day04.vo.*;
 import tech.aistar.util.MyBatisUtil;
+
+import java.util.Set;
 
 /**
  * @author success
@@ -26,6 +26,8 @@ public class UserMapperTest {
 
         queryVo.getOrdersCustomsVos().forEach(System.out::println);
 
-        queryVo.getOrdersCustomsVos().forEach(o -> System.out.println(o.getOrdersDetailCustomVos()));
+        queryVo.getOrdersCustomsVos().forEach(o -> o.getOrdersDetailCustomVos().forEach(System.out::println));
+
+        queryVo.getOrdersCustomsVos().forEach(o -> o.getOrdersDetailCustomVos().forEach(d -> System.out.println(d.getItemCustomVo())));
     }
 }

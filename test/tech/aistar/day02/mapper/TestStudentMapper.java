@@ -1,5 +1,7 @@
 package tech.aistar.day02.mapper;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 import tech.aistar.day01.entity.Student;
@@ -94,11 +96,18 @@ public class TestStudentMapper {
         //1.获取mapper代理对象
         StudentMapper mapper = sqlSession.getMapper(StudentMapper.class);
 
+        PageHelper.startPage(4,3);
+
         List<Student> studentList = mapper.findAll();
 
-        studentList.forEach(System.out::println);
+        PageInfo<Student> pageInfo = new PageInfo<>(studentList);
 
-        sqlSession.close();
+        pageInfo.getList().forEach(System.out::println);
+
+        System.out.println(pageInfo.getPageNum());
+        System.out.println(pageInfo.getPages());
+        System.out.println(pageInfo.getPageSize());
+        System.out.println(pageInfo.getTotal());
     }
 
 }

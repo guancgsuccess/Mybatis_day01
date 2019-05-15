@@ -90,4 +90,14 @@
             join items item on item.id = d.items_id
         where u.id = #{value}
     </select>
+
+
+    <select id="getUserAndOrderByIdLazy" resultMap="getUserAndOrderByIdLazyMap" parameterType="int">
+        select * from user where id = #{value}
+    </select>
+
+    <resultMap id="getUserAndOrderByIdLazyMap" type="UserCustomVo">
+        <id column="id" property="id"></id>
+        <collection select="tech.aistar.day04.mapper.OrdersMapper.getByUserId" column="user_id" property="ordersCustomsVos" ofType="OrdersCustomsVo"></collection>
+    </resultMap>
 </mapper>

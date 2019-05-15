@@ -2,7 +2,10 @@ package tech.aistar.day04.mapper;
 
 import tech.aistar.day04.entity.Orders;
 import tech.aistar.day04.vo.OrdersCustomVo;
+import tech.aistar.day04.vo.OrdersCustomsVo;
 import tech.aistar.day04.vo.OrdersQueryVo;
+
+import java.util.Set;
 
 /**
  * @author success
@@ -28,4 +31,10 @@ public interface OrdersMapper {
      */
     OrdersCustomVo findByOrderIdAndDetails(Integer id);
 
+    /**
+     * 根据用户的id进行查询
+     * @param userid
+     * @return
+     */
+    Set<OrdersCustomsVo> getByUserId(Integer userid);
 }

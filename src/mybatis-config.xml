@@ -23,6 +23,11 @@
 
         <!--开启列的匈牙利命名规则到java的驼峰命名规则的映射-->
         <setting name="mapUnderscoreToCamelCase" value="true"></setting>
+
+        <!--开启延迟加载-->
+        <setting name="lazyLoadingEnabled" value="true"></setting>
+
+        <setting name="aggressiveLazyLoading" value="false"></setting>
     </settings>
 
     <!--配置类型的别名-->

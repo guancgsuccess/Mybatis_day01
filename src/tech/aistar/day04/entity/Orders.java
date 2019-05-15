@@ -18,6 +18,7 @@ public class Orders implements Serializable {
      *
      * @mbggenerated Tue May 14 09:31:12 CST 2019
      */
+    //private User user;
     private Integer userId;
 
     /**

@@ -47,4 +47,8 @@
         select o.*,d.id did,d.orders_id,d.items_id,d.items_num from orders o
         join orderdetail d on d.orders_id = o.id where o.id = #{value}
     </select>
+
+    <select id="getByUserId" parameterType="int" resultType="ordersCustomsVo">
+        select * from orders where user_id = #{user_id}
+    </select>
 </mapper>

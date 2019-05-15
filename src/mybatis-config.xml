@@ -37,13 +37,12 @@
         <package name="tech.aistar.day04"></package>
     </typeAliases>
 
-    <!--分页插件-->
+    <!--配置分页插件-->
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">
             <property name="dialect" value="com.github.pagehelper.PageHelper"></property>
         </plugin>
     </plugins>
-
 
     <!--default的值作用使用对应的environment的id - 告诉mybatis当前使用的环境-->
     <environments default="development">

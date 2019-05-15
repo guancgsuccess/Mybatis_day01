@@ -3,6 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tech.aistar.day04.mapper.UserMapper">
+<cache/>
     <resultMap id="findByIdMap" type="userCustomVo" extends="common_sql.queryUserMap">
         <id column="id" property="id"></id>
         <!--<result column="username" property="username"></result>-->
@@ -92,6 +93,9 @@
     </select>
 
 
+    <!--
+         useCache="false" - 这条sql语句不会经过二级缓存
+    -->
     <select id="getUserAndOrderByIdLazy" resultMap="getUserAndOrderByIdLazyMap" parameterType="int">
         select * from user where id = #{value}
     </select>

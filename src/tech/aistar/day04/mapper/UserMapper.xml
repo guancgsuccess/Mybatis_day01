@@ -3,7 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="tech.aistar.day04.mapper.UserMapper">
-<cache/>
+<!-- 开启本mpper的namespace下的二级缓存
+     type:指定cache接口的实现类的类型,mybatis默认使用PerpetualCache
+         要和ehcache整合,需要设置type我ehcache实现cache接口的实现类.
+ -->
+<!--<cache/>-->
+<cache type="org.mybatis.caches.ehcache.EhcacheCache"/>
+<!--<cache/>-->
     <resultMap id="findByIdMap" type="userCustomVo" extends="common_sql.queryUserMap">
         <id column="id" property="id"></id>
         <!--<result column="username" property="username"></result>-->

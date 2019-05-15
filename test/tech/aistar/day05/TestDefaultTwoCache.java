@@ -24,7 +24,7 @@ public class TestDefaultTwoCache {
         //一级和二级缓存中都没有数据,所以会进行sql语句的查询
         //将返回的结果以key - value的方式放入到一级缓存中.
         //并且由于开启了二级缓存.还会将返回的结果放入一份在二级缓存中.
-        UserCustomVo u1 = mapper.getUserAndOrderByIdLazy(1);
+        UserCustomVo u1 = mapper.getUserAndOrderByIdLazy(22);
 
         System.out.println(u1);
         System.out.println("=============");
@@ -46,7 +46,7 @@ public class TestDefaultTwoCache {
 
         //优先从一级缓存中去寻找,如果有直接获取,但是一级缓存中并不存在
         //接着从二级缓存中去寻找,二级缓存中有,直接获取.否则和db交互
-        UserCustomVo u3 = um.getUserAndOrderByIdLazy(1);
+        UserCustomVo u3 = um.getUserAndOrderByIdLazy(10);
         System.out.println(u3);
         System.out.println("=======");
 

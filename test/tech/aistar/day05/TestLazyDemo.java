@@ -1,6 +1,7 @@
 package tech.aistar.day05;
 
 import org.junit.Test;
+import tech.aistar.day04.mapper.OrdersMapper;
 import tech.aistar.day04.mapper.UserMapper;
 import tech.aistar.day04.vo.OrdersCustomVo;
 import tech.aistar.day04.vo.OrdersCustomsVo;
@@ -24,13 +25,15 @@ public class TestLazyDemo {
         //如果没有使用到关联的对象,那么只会发送查询主对象的sql语句
         UserCustomVo user = mapper.getUserAndOrderByIdLazy(1);
 
+        //仅仅在此处打印了user,但是发现了控制台显示了
+        //Preparing: select * from orders where user_id = ?
+
+        //原因是:只要调用了对象的toString,clone,hashcode和equlas都会直接加载了.
+        // <setting name="lazyLoadTriggerMethods" value="clone"></setting>
         System.out.println(user);
 
-        //使用关联的对象
-       Set<OrdersCustomsVo> orders = user.getOrdersCustomsVos();
+        //使用到关联的对象 - 才会发送sql语句 -  select * from orders where user_id = ?
+        System.out.println(user.getOrdersCustomsVos());
 
-       for(OrdersCustomsVo o:orders){
-           System.out.println(o);
-       }
     }
 }

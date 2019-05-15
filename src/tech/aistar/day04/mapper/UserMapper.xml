@@ -98,6 +98,6 @@
 
     <resultMap id="getUserAndOrderByIdLazyMap" type="UserCustomVo">
         <id column="id" property="id"></id>
-        <collection select="tech.aistar.day04.mapper.OrdersMapper.getByUserId" column="user_id" property="ordersCustomsVos" ofType="OrdersCustomsVo"></collection>
+        <collection select="tech.aistar.day04.mapper.OrdersMapper.getByUserId" column="id" property="ordersCustomsVos" ofType="OrdersCustomsVo"></collection>
     </resultMap>
 </mapper>

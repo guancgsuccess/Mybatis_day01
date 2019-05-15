@@ -49,6 +49,6 @@
     </select>
 
     <select id="getByUserId" parameterType="int" resultType="ordersCustomsVo">
-        select * from orders where user_id = #{user_id}
+        select * from orders where user_id = #{value}
     </select>
 </mapper>

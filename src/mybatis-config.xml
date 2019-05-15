@@ -28,6 +28,9 @@
         <setting name="lazyLoadingEnabled" value="true"></setting>
 
         <setting name="aggressiveLazyLoading" value="false"></setting>
+
+
+        <setting name="lazyLoadTriggerMethods" value="clone"></setting>
     </settings>
 
     <!--配置类型的别名-->
